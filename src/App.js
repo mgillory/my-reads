@@ -1,27 +1,70 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import { Route } from 'react-router-dom'
+import BookShelf from './components/BookShelf'
+import Search from './components/Search'
+import * as BooksAPI from './api/BooksAPI'
+import './App.css'
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      books: [],
+      loading: true
+    }
+    this.sections = [{ name: 'currentlyReading', title: 'Currently Reading' }, { name: 'wantToRead', title: 'Want To Read' }, { name: 'read', title: 'Read' }];
+  }
+
+  componentDidMount() {
+    BooksAPI.getAll()
+      .then((books) => {
+        console.log('promise resolvida ', books);
+        this.setState(() => ({
+          books,
+          loading: false
+        }))
+      })
+      .catch(err => console.log(err));
+  }
+
+  handleChange = (book, shelf, flagAdded = false) => {
+    console.log(book)
+    if (flagAdded) {
+      this.setState(prevState => ({
+        books: [...prevState.books, book]
+      }))
+    }
+    else {
+      this.setState(prevState => ({
+        books: [...prevState.books]
+      }))
+    }
+    BooksAPI.update(book, shelf)
+      .then((res) => {
+        console.log(res)
+      })
+      .catch(err => console.log(err))
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div className="app">
+        <Route exact path='/' render={() => (
+          <BookShelf
+            books={this.state.books}
+            handleChange={this.handleChange}
+            sections={this.sections}
+            loading={this.state.loading}
+          />
+        )} />
+        <Route path='/search' render={() => (
+          <Search
+            booksOnTheShelf={this.state.books}
+            handleChange={this.handleChange}
+          />
+        )} />
       </div>
-    );
+    )
   }
 }
 
