@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Slider from "react-slick";
 import classnames from 'classnames';
 import '../App.css';
 
@@ -47,10 +48,18 @@ export default class BookList extends Component {
   render() {
     const { books } = this.props;
     const { hoverOn } = this.state;
+    const toShow = books.length <= 2 ? 2 : 3;
+    const settings = {
+      dots: true,
+      infinite: false,
+      speed: 500,
+      slidesToShow: toShow,
+      slidesToScroll: toShow
+    }
     return (
-      <ol className="books-grid">
+      <Slider {...settings}>
         {books && Array.isArray(books) && books.map((book, i) => (
-          <li key={book.id}>
+          <div key={book.id}>
             <div className="book">
               <div className="book-top">
                 <div
@@ -72,9 +81,9 @@ export default class BookList extends Component {
               <div className={classnames('book-title', { 'has-positive-translate': hoverOn > -1 && hoverOn < i ? true : false }, { 'has-negative-translate': hoverOn > -1 && hoverOn > i ? true : false })}>{book.title}</div>
               <div className={classnames('book-authors', { 'has-positive-translate': hoverOn > -1 && hoverOn < i ? true : false }, { 'has-negative-translate': hoverOn > -1 && hoverOn > i ? true : false })}>{book.authors}</div>
             </div>
-          </li>
+          </div>
         ))}
-      </ol>
+      </Slider>
     );
   }
 }
