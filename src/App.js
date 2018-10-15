@@ -18,7 +18,6 @@ class App extends Component {
   componentDidMount() {
     BooksAPI.getAll()
       .then((books) => {
-        console.log('promise resolvida ', books);
         this.setState(() => ({
           books,
           loading: false
@@ -59,6 +58,7 @@ class App extends Component {
         )} />
         <Route path='/search' render={() => (
           <Search
+            sections={this.sections}
             booksOnTheShelf={this.state.books}
             handleChange={this.handleChange}
           />

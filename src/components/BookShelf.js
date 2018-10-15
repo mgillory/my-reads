@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import { PulseLoader } from 'react-spinners';
+import { FaSearch } from "react-icons/fa";
 import Search from './Search';
 import BookList from './BookList';
 import '../App.css';
@@ -26,24 +27,35 @@ export default class BookShelf extends Component {
           <BookList
             books={books.filter(book => book.shelf === section.name)}
             handleChange={handleChange}
+            sections={sections}
           />
         </div>
       </div>
     ));
 
     return (
-      <div className="list-books">
-        <div className="list-books-title">
-          <h1>MyReads</h1>
-        </div>
+      <div className="home-container">
+        <header>
+          <div className="logo">
+            <h1 id="my">my</h1>
+            <h1 id="reads">reads</h1>
+          </div>
+          <Link to="/search">
+            <button className="btn btn-3 btn-3e">
+              Search <FaSearch className="search-icon" />
+            </button>
+          </Link>
+        </header>
         <div className="list-books-content">
           <div>
             {renderSections}
           </div>
         </div>
         <div className="open-search">
-          <Link to="/search" component={Search}>Add a book</Link>
+          <Link to="/search">Add a book</Link>
         </div>
+
+        <Route path="/search" component={Search} />
       </div>
     );
   }

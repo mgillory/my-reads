@@ -29,7 +29,7 @@ export default class Search extends Component {
 
   render() {
     const { queryResult, loading } = this.state;
-    const { booksOnTheShelf, handleChange } = this.props;
+    const { booksOnTheShelf, handleChange, sections } = this.props;
 
     return (
       <div>
@@ -54,7 +54,9 @@ export default class Search extends Component {
               loading={loading}
             />
             <BookList
+              onSearch
               books={queryResult}
+              sections={sections}
               booksOnTheShelf={booksOnTheShelf}
               handleChange={handleChange}
             />
