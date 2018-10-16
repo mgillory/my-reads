@@ -27,7 +27,6 @@ class App extends Component {
   }
 
   handleChange = (book, shelf, flagAdded = false) => {
-    console.log(book)
     if (flagAdded) {
       this.setState(prevState => ({
         books: [...prevState.books, book]

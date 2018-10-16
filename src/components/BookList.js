@@ -1,12 +1,23 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
 import classnames from 'classnames';
-import {
-  IoIosArrowDown
-} from "react-icons/io";
 import Dropdown from './Dropdown';
 import '../App.css';
 
+const modalStyle = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    borderRadius: '4%',
+    transform: 'translate(-50%, -50%)'
+  },
+  overlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0.44)'
+  }
+};
 Modal.setAppElement('#root');
 
 export default class BookList extends Component {
@@ -16,6 +27,7 @@ export default class BookList extends Component {
       showModal: false
     }
     this.bookClicked = {};
+    this.onShelf = null;
   }
 
   findIndex = (id) => {
@@ -45,6 +57,7 @@ export default class BookList extends Component {
   }
 
   onClick = (book) => {
+    console.log(book);
     this.bookClicked = book;
     this.setState({ showModal: !this.state.showModal });
   }
@@ -76,7 +89,7 @@ export default class BookList extends Component {
               </div>
               <div className="card-right-cta">
                 <div className="card-right-cta-container">
-                  <div id="readmore">Read more...</div>
+                  <div id="readmore" onClick={() => this.onClick(book)}>Read more...</div>
                   <Dropdown
                     title='Add to'
                     list={sections}
@@ -91,14 +104,12 @@ export default class BookList extends Component {
         ))}
         <Modal
           isOpen={showModal}
-          className='modal'
-          overlayClassName='modal-overlay'
+          style={modalStyle}
           onRequestClose={this.closeModal}
           contentLabel="Example Modal"
         >
           <h2>{this.bookClicked.title}</h2>
           <p>{this.bookClicked.authors}</p>
-          <a className='modal-close-button' onClick={this.closeModal}></a>
         </Modal>
       </div>
     );

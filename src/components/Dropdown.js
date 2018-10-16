@@ -16,8 +16,14 @@ export default class Dropdown extends Component {
     this.setState({ ddOpen: !this.state.ddOpen })
   }
 
+  onChangeShelf = (shelf, book) => {
+    const { onChange } = this.props;
+    this.toggleList();
+    onChange(shelf, book);
+  }
+
   render() {
-    const { list, title, book, isBookOnTheShelf, onChange } = this.props;
+    const { list, title, book, isBookOnTheShelf } = this.props;
     const { ddOpen } = this.state;
     const shelf = isBookOnTheShelf(book.id);
     return (
@@ -31,9 +37,9 @@ export default class Dropdown extends Component {
         </div>
         {ddOpen && <ul className="dd-list">
           {list.map((item) => shelf !== item.name && (
-            <li className="dd-list-item" key={item.name} onClick={() => onChange(item.name, book)} >{item.title}</li>
+            <li className="dd-list-item" key={item.name} onClick={() => this.onChangeShelf(item.name, book)} >{item.title}</li>
           ))}
-          {shelf ? <li className="dd-list-item" key='none' onClick={() => onChange('none', book)} >None</li> : null}
+          {shelf ? <li className="dd-list-item" key='none' onClick={() => this.onChangeShelf('none', book)} >None</li> : null}
         </ul>}
       </div>
     )
