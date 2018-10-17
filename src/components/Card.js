@@ -21,19 +21,10 @@ export default class Card extends Component {
     handleChange(array[bookIndex], shelf, shouldPushNewBook);
   }
 
-  isBookOnTheShelf = (bookId) => {
-    const { booksOnTheShelf, books, onSearch, sections } = this.props;
-    const book = onSearch ? booksOnTheShelf && booksOnTheShelf.find(book => book.id === bookId) : books && books.find(book => book.id === bookId);
-    if (book) {
-      this.onShelf = sections.find(s => s.name === book.shelf);
-      return book.shelf;
-    }
-    return false;
-  }
-
   render() {
     const { book, books, booksOnTheShelf, onSearch, onClick, sections } = this.props;
     const onShelf = onSearch ? booksOnTheShelf && booksOnTheShelf.find(b => b.id === book.id) : books && books.find(b => b.id === book.id);
+    const shelfTitle = onShelf && sections.filter(s => s.name === onShelf.shelf)[0].title;
     return (
       <div key={book.id} className={classnames('card', { 'card-onshelf': onSearch && onShelf })}>
         <div className="card-left" style={{ width: 128, height: 189, backgroundImage: `url(${book.imageLinks && book.imageLinks.smallThumbnail})` }} />
@@ -46,7 +37,7 @@ export default class Card extends Component {
                 <li>Published: {book.publishedDate && book.publishedDate.substring(0, 4)}</li>
                 <li>Pages: {book.pageCount}</li>
               </ul>
-              {onSearch && onShelf ? <p className="onShelf">Shelf: {onShelf.shelf}</p> : null}
+              {onSearch && onShelf ? <p className="onShelf">Shelf: {shelfTitle}</p> : null}
             </div>
           </div>
           <div className="card-right-cta">

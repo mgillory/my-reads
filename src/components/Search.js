@@ -34,34 +34,32 @@ export default class Search extends Component {
 
     return (
       <div>
-        <div className="search-books">
-          <div className="search-books-bar">
-            <Link to="/" component={BookShelf} className="close-search">Close</Link>
-            <div className="search-books-input-wrapper">
-              <input
-                type="text"
-                placeholder="Search by title or author"
-                value={this.state.searchQuery}
-                onChange={this.onChangeQuery}
-              />
-            </div>
-          </div>
-          <div className="search-books-results">
-            <PulseLoader
-              className="loader"
-              sizeUnit={"px"}
-              size={14}
-              color={'#123abc'}
-              loading={loading}
-            />
-            <BookList
-              onSearch
-              books={queryResult}
-              sections={sections}
-              booksOnTheShelf={booksOnTheShelf}
-              handleChange={handleChange}
+        <div className="search-books-bar">
+          <Link to="/" component={BookShelf} className="close-search">Close</Link>
+          <div className="search-books-input-wrapper">
+            <input
+              type="text"
+              placeholder="Search by title or author"
+              value={this.state.searchQuery}
+              onChange={this.onChangeQuery}
             />
           </div>
+        </div>
+        <div className="search-books-results">
+          <PulseLoader
+            className="loader"
+            sizeUnit={"px"}
+            size={14}
+            color={'#123abc'}
+            loading={loading}
+          />
+          <BookList
+            onSearch
+            books={queryResult}
+            sections={sections}
+            booksOnTheShelf={booksOnTheShelf}
+            handleChange={handleChange}
+          />
         </div>
       </div >
     );

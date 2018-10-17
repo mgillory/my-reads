@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
 import Card from './Card';
+import ModalContent from './ModalContent';
 import '../App.css';
 
 const modalStyle = {
@@ -57,28 +58,7 @@ export default class BookList extends Component {
           style={modalStyle}
           onRequestClose={this.closeModal}
         >
-          <div className="modal-container">
-            <div className="modal-upper">
-              <div className="">
-                <div style={{ width: 128, height: 189, backgroundImage: `url(${this.bookClicked.imageLinks && this.bookClicked.imageLinks.smallThumbnail})`, marginRight: 16, marginBottom: 16 }}></div>
-                <p>{this.bookClicked.averageRating}</p>
-              </div>
-              <div className="modal-upper-content">
-                <div className="modal-upper-content-titles">
-                  <h2>{this.bookClicked.title}</h2>
-                  {this.bookClicked && this.bookClicked.subtitle ? <h2>{': ' + this.bookClicked.subtitle}</h2> : null}
-                </div>
-                <p>{this.bookClicked.authors}</p>
-                <p>{this.bookClicked.categories}</p>
-                <p>{this.bookClicked.publisher}</p>
-                <p>{this.bookClicked.publishedDate}</p>
-                <p>{this.bookClicked.shelf}</p>
-              </div>
-            </div>
-            <div className="modal-lower">
-              {this.bookClicked.description}
-            </div>
-          </div>
+          <ModalContent book={this.bookClicked} />
         </Modal>
       </div>
     );

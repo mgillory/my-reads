@@ -3,6 +3,7 @@ import {
   IoIosArrowDown,
   IoIosArrowUp
 } from "react-icons/io";
+import '../App.css';
 
 export default class Dropdown extends Component {
   constructor(props) {

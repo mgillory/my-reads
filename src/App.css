@@ -302,6 +302,7 @@ header #reads {
   margin: 0;
   padding: 8px;
   font-weight: 300;
+  text-align: center;
   background: rgba(255, 255, 255, 0.90);
   border-radius: 5%;
   font-size: .8em;
