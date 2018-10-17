@@ -10,7 +10,8 @@ class App extends Component {
     super(props)
     this.state = {
       books: [],
-      loading: true
+      loading: true,
+      tois: 0
     }
     this.sections = [{ name: 'currentlyReading', title: 'Currently Reading' }, { name: 'wantToRead', title: 'Want To Read' }, { name: 'read', title: 'Read' }];
   }
@@ -27,6 +28,12 @@ class App extends Component {
   }
 
   handleChange = (book, shelf, flagAdded = false) => {
+    console.log('handleChange ', book);
+    BooksAPI.update(book, shelf)
+      .then((res) => {
+        console.log(res)
+      })
+      .catch(err => console.log(err))
     if (flagAdded) {
       this.setState(prevState => ({
         books: [...prevState.books, book]
@@ -37,11 +44,6 @@ class App extends Component {
         books: [...prevState.books]
       }))
     }
-    BooksAPI.update(book, shelf)
-      .then((res) => {
-        console.log(res)
-      })
-      .catch(err => console.log(err))
   }
 
   render() {

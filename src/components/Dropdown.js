@@ -16,16 +16,15 @@ export default class Dropdown extends Component {
     this.setState({ ddOpen: !this.state.ddOpen })
   }
 
-  onChangeShelf = (shelf, book) => {
+  onChangeShelf = (shelf) => {
     const { onChange } = this.props;
     this.toggleList();
-    onChange(shelf, book);
+    onChange(shelf);
   }
 
   render() {
-    const { list, title, book, isBookOnTheShelf } = this.props;
+    const { list, title, shelf } = this.props;
     const { ddOpen } = this.state;
-    const shelf = isBookOnTheShelf(book.id);
     return (
       <div className="dd-wrapper">
         <div className="dd dd-btn" onClick={() => this.toggleList()}>
@@ -37,9 +36,9 @@ export default class Dropdown extends Component {
         </div>
         {ddOpen && <ul className="dd-list">
           {list.map((item) => shelf !== item.name && (
-            <li className="dd-list-item" key={item.name} onClick={() => this.onChangeShelf(item.name, book)} >{item.title}</li>
+            <li className="dd-list-item" key={item.name} onClick={() => this.onChangeShelf(item.name)} >{item.title}</li>
           ))}
-          {shelf ? <li className="dd-list-item" key='none' onClick={() => this.onChangeShelf('none', book)} >None</li> : null}
+          {shelf !== 'none' ? <li className="dd-list-item" key='none' onClick={() => this.onChangeShelf('none')} >None</li> : null}
         </ul>}
       </div>
     )

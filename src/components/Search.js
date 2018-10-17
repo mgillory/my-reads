@@ -30,6 +30,7 @@ export default class Search extends Component {
   render() {
     const { queryResult, loading } = this.state;
     const { booksOnTheShelf, handleChange, sections } = this.props;
+    console.log('Search: ', booksOnTheShelf);
 
     return (
       <div>

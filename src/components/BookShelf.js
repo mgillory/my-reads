@@ -11,7 +11,7 @@ export default class BookShelf extends Component {
     const {
       books, sections, handleChange, loading,
     } = this.props;
-    console.log(books);
+    console.log('BookShelf: ', books);
 
     const renderSections = sections.map(section => (
       <div key={section.name} className="bookshelf">
@@ -46,11 +46,11 @@ export default class BookShelf extends Component {
             </button>
           </Link>
         </header>
-        <div className="list-books-content">
-          <div>
+        <main>
+          <div className="list-books-content">
             {renderSections}
           </div>
-        </div>
+        </main>
         <div className="open-search">
           <Link to="/search">Add a book</Link>
         </div>

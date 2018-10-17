@@ -404,3 +404,41 @@ header #reads {
   opacity: 1;
   transition: opacity 350ms ease-in-out;
 }
+
+.modal-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-upper {
+  display: flex;
+}
+
+.modal-upper h2,
+.modal-upper p {
+  margin: 0;
+  padding: 0;
+}
+
+.modal-upper h2 {
+  color: rgba(255, 255, 255, 0.90);
+}
+
+.modal-upper p {
+  color: rgba(255, 255, 255, 0.80);
+}
+
+.modal-upper-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-upper-content-titles {
+  display: flex;
+}
+
+.modal-lower {
+  background: #292929;
+  color: rgba(255, 255, 255, 0.80);
+  overflow-y: auto;
+}

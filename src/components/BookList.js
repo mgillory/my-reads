@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
-import classnames from 'classnames';
-import Dropdown from './Dropdown';
+import Card from './Card';
 import '../App.css';
 
 const modalStyle = {
   content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    borderRadius: '4%',
-    transform: 'translate(-50%, -50%)'
+    backgroundColor: '#313131',
+    borderWidth: 1,
+    borderColor: '#262626'
   },
   overlay: {
     backgroundColor: 'rgba(0, 0, 0, 0.44)'
@@ -27,33 +22,6 @@ export default class BookList extends Component {
       showModal: false
     }
     this.bookClicked = {};
-    this.onShelf = null;
-  }
-
-  findIndex = (id) => {
-    const { books } = this.props;
-    for (let i = 0; i < books.length; i++) {
-      if (books[i].id === id) {
-        return i;
-      }
-    }
-  }
-
-  onChange = (shelf, book) => {
-    const { books, handleChange, booksOnTheShelf } = this.props;
-    const bookIndex = this.findIndex(book.id);
-    books[bookIndex].shelf = shelf;
-    handleChange(books[bookIndex], shelf, booksOnTheShelf ? true : false);
-  }
-
-  isBookOnTheShelf = (bookId) => {
-    const { booksOnTheShelf, books, onSearch, sections } = this.props;
-    const book = onSearch ? booksOnTheShelf && booksOnTheShelf.find(book => book.id === bookId) : books && books.find(book => book.id === bookId);
-    if (book) {
-      this.onShelf = sections.find(s => s.name === book.shelf);
-      return book.shelf;
-    }
-    return false;
   }
 
   onClick = (book) => {
@@ -68,48 +36,49 @@ export default class BookList extends Component {
   }
 
   render() {
-    const { books, sections, onSearch } = this.props;
+    const { books, sections, onSearch, booksOnTheShelf, handleChange } = this.props;
     const { showModal } = this.state;
     return (
       <div className="card-flex-container">
         {books && Array.isArray(books) && books.map((book, i) => (
-          <div key={book.id} className={classnames('card', { 'card-onshelf': onSearch && this.isBookOnTheShelf(book.id) })}>
-            <div className="card-left" style={{ width: 128, height: 189, backgroundImage: `url(${book.imageLinks && book.imageLinks.smallThumbnail})` }} />
-            <div className="card-right">
-              <div className="card-right-headers">
-                <h1>{book.title}</h1>
-                <h2>By: {book.authors && book.authors.map((a, i) => (i === book.authors.length - 1 ? a : a + ', '))}</h2>
-                <div className="card-right-details">
-                  <ul>
-                    <li>Published: {book.publishedDate && book.publishedDate.substring(0, 4)}</li>
-                    <li>Pages: {book.pageCount}</li>
-                  </ul>
-                  {onSearch && this.isBookOnTheShelf(book.id) ? <p className="onShelf">Shelf: {this.onShelf && this.onShelf.title}</p> : null}
-                </div>
-              </div>
-              <div className="card-right-cta">
-                <div className="card-right-cta-container">
-                  <div id="readmore" onClick={() => this.onClick(book)}>Read more...</div>
-                  <Dropdown
-                    title='Add to'
-                    list={sections}
-                    book={book}
-                    isBookOnTheShelf={this.isBookOnTheShelf}
-                    onChange={this.onChange}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+          <Card
+            key={book.id}
+            books={books}
+            book={book}
+            onSearch={onSearch}
+            booksOnTheShelf={booksOnTheShelf}
+            handleChange={handleChange}
+            onClick={this.onClick}
+            sections={sections}
+          />
         ))}
         <Modal
           isOpen={showModal}
           style={modalStyle}
           onRequestClose={this.closeModal}
-          contentLabel="Example Modal"
         >
-          <h2>{this.bookClicked.title}</h2>
-          <p>{this.bookClicked.authors}</p>
+          <div className="modal-container">
+            <div className="modal-upper">
+              <div className="">
+                <div style={{ width: 128, height: 189, backgroundImage: `url(${this.bookClicked.imageLinks && this.bookClicked.imageLinks.smallThumbnail})`, marginRight: 16, marginBottom: 16 }}></div>
+                <p>{this.bookClicked.averageRating}</p>
+              </div>
+              <div className="modal-upper-content">
+                <div className="modal-upper-content-titles">
+                  <h2>{this.bookClicked.title}</h2>
+                  {this.bookClicked && this.bookClicked.subtitle ? <h2>{': ' + this.bookClicked.subtitle}</h2> : null}
+                </div>
+                <p>{this.bookClicked.authors}</p>
+                <p>{this.bookClicked.categories}</p>
+                <p>{this.bookClicked.publisher}</p>
+                <p>{this.bookClicked.publishedDate}</p>
+                <p>{this.bookClicked.shelf}</p>
+              </div>
+            </div>
+            <div className="modal-lower">
+              {this.bookClicked.description}
+            </div>
+          </div>
         </Modal>
       </div>
     );
