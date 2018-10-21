@@ -1,32 +1,14 @@
-/*
-Header: #262626
-Background: #313131
-Bookshelf: #292929
-Action: #BD00FF
-Other idea: variations of white opacity around 40%
-*/
-
-/*
-<div className=''>
-                    <select value={this.isBookOnTheShelf(book.id) || book.shelf || 'none'} onChange={e => this.onChange(e, book)}>
-                      <option value="move" disabled>Move to...</option>
-                      <option value="currentlyReading">Currently Reading</option>
-                      <option value="wantToRead">Want to Read</option>
-                      <option value="read">Read</option>
-                      <option value="none">None</option>
-                    </select>
-                  </div>
-*/
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,700');
 
-html, body, .root {
+html, body, .root, .app {
   height: 100%;
   font-family: 'Montserrat', sans-serif;
 }
+.app {
+  min-height: 100vh;
+}
 body {
   line-height: 1.5;
-}
-body, .app {
   background: #313131;
 }
 
@@ -34,15 +16,18 @@ body, .app {
 
 header {
   padding: 22px;
-  background: #262626;
   display: flex;
-  /*text-align: left;*/
   justify-content: space-between;
+  align-content: center;
 }
 
 header h1 {
   margin: 0;
   color: white;
+}
+
+.header-theme-selector {
+  display: none;
 }
 
 .logo {
@@ -51,6 +36,10 @@ header h1 {
 
 header #reads {
   color: #BD00FF;
+}
+
+.theme-and-search {
+  display: flex;
 }
 
 .btn {
@@ -121,36 +110,11 @@ header #reads {
 .search-icon {
   position: absolute;
   right: 10%;
-  bottom: 35%;
+  bottom: 22%;
 }
 
 .open-search, .open-search a {
   display: none;
-}
-
-@media screen and (max-width: 768px) {
-  .btn {
-    display: none;
-  }
-  .open-search {
-    display: block;
-    position: fixed;
-    right: 25px;
-    bottom: 25px;
-  }
-  .open-search a {
-    display: block;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: #BD00FF;
-    background-image: url('./icons/add.svg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 28px;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    font-size: 0;
-  }
 }
 
 .list-books-content {
@@ -162,7 +126,6 @@ header #reads {
   letter-spacing: 3px;
   text-transform: uppercase;
   font-size: 1.3em;
-  color: #fff;
 }
 
 .bookshelf-books {
@@ -180,7 +143,6 @@ header #reads {
   flex-direction: row;
   width: 400px;
   height: 189px;
-  background: #292929;
   margin: 22px 0;
   border-radius: 10px;
   -webkit-border-radius: 10px;
@@ -220,14 +182,12 @@ header #reads {
 }
 
 .card-right h1 {
-  color: rgba(255, 255, 255, 0.90);
   font-size: .9em;
 }
 
 .card-right h2 {
-  color: rgba(255, 255, 255, 0.85);
   font-weight: 300;
-  font-size: .8em;
+  font-size: .75em;
 }
 
 .card-right-headers h1,
@@ -238,15 +198,14 @@ header #reads {
 
 .card-right-details ul {
   list-style-type: none;
-  margin: 4px 0px;
+  margin: 0;
   padding: 0;
 }
 
 .card-right-details ul li {
   display: inline;
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.85);
-  font-size: .8em;
+  font-size: .7em;
   padding: 0 8px 0 0;
 }
 
@@ -254,7 +213,6 @@ header #reads {
   padding: 0;
   margin: 0;
   font-weight: 400;
-  color: rgba(255, 255, 255, .9);
   font-size: .8em;
 }
 
@@ -303,10 +261,8 @@ header #reads {
   padding: 8px;
   font-weight: 300;
   text-align: center;
-  background: rgba(255, 255, 255, 0.90);
   border-radius: 5%;
   font-size: .8em;
-  color: rgba(0, 0, 0, 0.70);
   list-style-type: none;
 }
 
@@ -316,8 +272,8 @@ header #reads {
 
 .arrow {
   position: absolute;
-  right: 6%;
-  bottom: 21%;
+  right: 10%;
+  bottom: 10%;
 }
 
 #readmore {
@@ -370,31 +326,93 @@ header #reads {
   padding: 80px 10px 20px;
 }
 
-.book-shelf-changer {
-  position: absolute;
-  right: 0;
-  bottom: -10px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: #60ac5d;
-  background-image: url('./icons/arrow-drop-down.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 20px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-}
-.book-shelf-changer select {
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  cursor: pointer;
-}
-
 .loader {
   text-align: center;
 }
 
+footer {
+  padding: 12px;
+}
+
+.footer-content {
+  display: flex;  
+  justify-content: space-between;
+}
+
+.footer-content p {
+  font-weight: 300;
+  font-size: .9em;
+}
+
+.footer-theme-selector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-theme-selector-p {
+  margin-right: 8px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 23px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #BD00FF;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #BD00FF;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(16px);
+  -ms-transform: translateX(16px);
+  transform: translateX(16px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
 /* MODAL STYLES HERE */
 
 .ReactModal__Overlay {
@@ -442,4 +460,42 @@ header #reads {
   background: #292929;
   color: rgba(255, 255, 255, 0.80);
   overflow-y: auto;
+}
+
+@media screen and (max-width: 768px) {
+  .btn {
+    display: none;
+  }
+  .open-search {
+    display: block;
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+  }
+  .open-search a {
+    display: block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #BD00FF;
+    background-image: url('./icons/add.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 28px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    font-size: 0;
+  }
+  .header-theme-selector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .header-theme-selector-p {
+    margin-right: 8px;
+  }
+
+  .footer-theme-selector {
+    display: none;
+  }
 }

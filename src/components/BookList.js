@@ -37,7 +37,7 @@ export default class BookList extends Component {
   }
 
   render() {
-    const { books, sections, onSearch, booksOnTheShelf, handleChange } = this.props;
+    const { books, sections, onSearch, booksOnTheShelf, handleChange, themeStyle } = this.props;
     const { showModal } = this.state;
     return (
       <div className="card-flex-container">
@@ -51,6 +51,7 @@ export default class BookList extends Component {
             handleChange={handleChange}
             onClick={this.onClick}
             sections={sections}
+            themeStyle={themeStyle}
           />
         ))}
         <Modal

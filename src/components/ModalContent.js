@@ -1,13 +1,20 @@
 import React from 'react';
+import Rating from 'react-stars';
 import '../App.css';
 
 export default function ModalContent({ book }) {
   return (
     <div className="modal-container">
       <div className="modal-upper">
-        <div className="">
+        <div className="modal-cover-rating">
           <div style={{ width: 128, height: 189, backgroundImage: `url(${book.imageLinks && book.imageLinks.smallThumbnail})`, marginRight: 16, marginBottom: 16 }}></div>
-          <p>{book.averageRating}</p>
+          <Rating
+            className="modal-rating"
+            count={5}
+            value={book.averageRating}
+            onChange={() => console.log('mudei')}
+            size={20}
+            color2={'#BD00FF'} />
         </div>
         <div className="modal-upper-content">
           <div className="modal-upper-content-titles">

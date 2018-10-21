@@ -29,11 +29,11 @@ export default class Search extends Component {
 
   render() {
     const { queryResult, loading } = this.state;
-    const { booksOnTheShelf, handleChange, sections } = this.props;
+    const { booksOnTheShelf, handleChange, sections, themeStyle } = this.props;
     console.log('Search: ', booksOnTheShelf);
 
     return (
-      <div>
+      <div className="search-container">
         <div className="search-books-bar">
           <Link to="/" component={BookShelf} className="close-search">Close</Link>
           <div className="search-books-input-wrapper">
@@ -45,7 +45,7 @@ export default class Search extends Component {
             />
           </div>
         </div>
-        <div className="search-books-results">
+        <div style={{ background: themeStyle.background }} className="search-books-results">
           <PulseLoader
             className="loader"
             sizeUnit={"px"}
@@ -59,6 +59,7 @@ export default class Search extends Component {
             sections={sections}
             booksOnTheShelf={booksOnTheShelf}
             handleChange={handleChange}
+            themeStyle={themeStyle}
           />
         </div>
       </div >
