@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
+import PropTypes from 'prop-types';
 import Rating from 'react-stars';
 import Dropdown from './Dropdown';
 import '../App.css';
@@ -75,5 +76,16 @@ export default class Card extends Component {
       </div>
     )
   }
+}
+
+Card.propTypes = {
+  books: PropTypes.array.isRequired,
+  book: PropTypes.object.isRequired,
+  onSearch: PropTypes.bool,
+  booksOnTheShelf: PropTypes.array,
+  handleChange: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
+  sections: PropTypes.array.isRequired,
+  themeStyle: PropTypes.object.isRequired,
 }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function ThemeSwitcher({ themeStyle, divClass, pClass, onThemeChange, darkTheme }) {
   return (
@@ -10,4 +11,12 @@ export default function ThemeSwitcher({ themeStyle, divClass, pClass, onThemeCha
       </label>
     </div>
   )
+}
+
+ThemeSwitcher.propTypes = {
+  themeStyle: PropTypes.object.isRequired,
+  divClass: PropTypes.string.isRequired,
+  pClass: PropTypes.string.isRequired,
+  onThemeChange: PropTypes.func.isRequired,
+  darkTheme: PropTypes.bool.isRequired,
 }

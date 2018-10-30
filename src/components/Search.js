@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { PulseLoader } from 'react-spinners';
+import PropTypes from 'prop-types';
 import BookShelf from './BookShelf';
 import BookList from './BookList';
 import { search } from '../api/BooksAPI';
@@ -62,4 +63,11 @@ export default class Search extends Component {
       </div >
     );
   }
+}
+
+Search.propTypes = {
+  sections: PropTypes.array.isRequired,
+  booksOnTheShelf: PropTypes.array.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  themeStyle: PropTypes.object.isRequired,
 }
