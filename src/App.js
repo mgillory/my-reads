@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 import BookShelf from './components/BookShelf'
 import Search from './components/Search'
+import { getThemeStyle } from './utils/theme';
 import * as BooksAPI from './api/BooksAPI'
 import './App.css'
 
@@ -11,9 +12,10 @@ class App extends Component {
     this.state = {
       books: [],
       loading: true,
-      tois: 0
+      darkTheme: true
     }
     this.sections = [{ name: 'currentlyReading', title: 'Currently Reading' }, { name: 'wantToRead', title: 'Want To Read' }, { name: 'read', title: 'Read' }];
+    this.themeStyle = getThemeStyle(true);
   }
 
   componentDidMount() {
@@ -27,8 +29,12 @@ class App extends Component {
       .catch(err => console.log(err));
   }
 
+  onThemeChange = () => {
+    this.themeStyle = getThemeStyle(!this.state.darkTheme);
+    this.setState({ darkTheme: !this.state.darkTheme });
+  }
+
   handleChange = (book, shelf, flagAdded = false) => {
-    console.log('handleChange ', book);
     BooksAPI.update(book, shelf)
       .then((res) => {
         console.log(res)
@@ -48,13 +54,16 @@ class App extends Component {
 
   render() {
     return (
-      <div className="app">
+      <div style={{ background: this.themeStyle.background }} className="app">
         <Route exact path='/' render={() => (
           <BookShelf
             books={this.state.books}
             handleChange={this.handleChange}
             sections={this.sections}
             loading={this.state.loading}
+            onThemeChange={this.onThemeChange}
+            darkTheme={this.state.darkTheme}
+            themeStyle={this.themeStyle}
           />
         )} />
         <Route path='/search' render={() => (
@@ -62,6 +71,7 @@ class App extends Component {
             sections={this.sections}
             booksOnTheShelf={this.state.books}
             handleChange={this.handleChange}
+            themeStyle={this.themeStyle}
           />
         )} />
       </div>

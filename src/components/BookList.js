@@ -4,16 +4,6 @@ import Card from './Card';
 import ModalContent from './ModalContent';
 import '../App.css';
 
-const modalStyle = {
-  content: {
-    backgroundColor: '#313131',
-    borderWidth: 1,
-    borderColor: '#262626'
-  },
-  overlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.44)'
-  }
-};
 Modal.setAppElement('#root');
 
 export default class BookList extends Component {
@@ -23,10 +13,19 @@ export default class BookList extends Component {
       showModal: false
     }
     this.bookClicked = {};
+    this.modalStyle = {
+      content: {
+        backgroundColor: props.themeStyle.background,
+        borderWidth: 1,
+        borderColor: '#262626'
+      },
+      overlay: {
+        backgroundColor: 'rgba(0, 0, 0, 0.44)'
+      }
+    };
   }
 
   onClick = (book) => {
-    console.log(book);
     this.bookClicked = book;
     this.setState({ showModal: !this.state.showModal });
   }
@@ -37,8 +36,9 @@ export default class BookList extends Component {
   }
 
   render() {
-    const { books, sections, onSearch, booksOnTheShelf, handleChange } = this.props;
+    const { books, sections, onSearch, booksOnTheShelf, handleChange, themeStyle } = this.props;
     const { showModal } = this.state;
+    this.modalStyle.content.backgroundColor = themeStyle.background;
     return (
       <div className="card-flex-container">
         {books && Array.isArray(books) && books.map((book, i) => (
@@ -51,14 +51,17 @@ export default class BookList extends Component {
             handleChange={handleChange}
             onClick={this.onClick}
             sections={sections}
+            themeStyle={themeStyle}
           />
         ))}
         <Modal
           isOpen={showModal}
-          style={modalStyle}
+          style={this.modalStyle}
           onRequestClose={this.closeModal}
         >
-          <ModalContent book={this.bookClicked} />
+          <ModalContent
+            book={this.bookClicked}
+            themeStyle={themeStyle} />
         </Modal>
       </div>
     );

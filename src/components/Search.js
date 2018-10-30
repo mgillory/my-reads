@@ -18,10 +18,8 @@ export default class Search extends Component {
       searchQuery: e.target.value,
       loading: true
     });
-    console.log(e.target.value)
     search(e.target.value)
       .then((res) => {
-        console.log(res)
         this.setState({ queryResult: res, loading: false })
       })
       .catch(err => console.log(err))
@@ -29,11 +27,10 @@ export default class Search extends Component {
 
   render() {
     const { queryResult, loading } = this.state;
-    const { booksOnTheShelf, handleChange, sections } = this.props;
-    console.log('Search: ', booksOnTheShelf);
+    const { booksOnTheShelf, handleChange, sections, themeStyle } = this.props;
 
     return (
-      <div>
+      <div className="search-container">
         <div className="search-books-bar">
           <Link to="/" component={BookShelf} className="close-search">Close</Link>
           <div className="search-books-input-wrapper">
@@ -45,12 +42,12 @@ export default class Search extends Component {
             />
           </div>
         </div>
-        <div className="search-books-results">
+        <div style={{ background: themeStyle.background }} className="search-books-results">
           <PulseLoader
             className="loader"
             sizeUnit={"px"}
             size={14}
-            color={'#123abc'}
+            color={themeStyle.action}
             loading={loading}
           />
           <BookList
@@ -59,6 +56,7 @@ export default class Search extends Component {
             sections={sections}
             booksOnTheShelf={booksOnTheShelf}
             handleChange={handleChange}
+            themeStyle={themeStyle}
           />
         </div>
       </div >
