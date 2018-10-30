@@ -2,7 +2,7 @@ import React from 'react';
 import Rating from 'react-stars';
 import '../App.css';
 
-export default function ModalContent({ book }) {
+export default function ModalContent({ book, themeStyle }) {
   return (
     <div className="modal-container">
       <div className="modal-upper">
@@ -12,23 +12,22 @@ export default function ModalContent({ book }) {
             className="modal-rating"
             count={5}
             value={book.averageRating}
-            onChange={() => console.log('mudei')}
             size={20}
             color2={'#BD00FF'} />
         </div>
         <div className="modal-upper-content">
           <div className="modal-upper-content-titles">
-            <h2>{book.title}</h2>
-            {book && book.subtitle ? <h2>{': ' + book.subtitle}</h2> : null}
+            <h2 style={{ color: themeStyle.textOpacity1 }}>{book.title}</h2>
+            {book && book.subtitle ? <h2 style={{ color: themeStyle.textOpacity1 }}>{': ' + book.subtitle}</h2> : null}
           </div>
-          <p>{book.authors}</p>
-          <p>{book.categories}</p>
-          <p>{book.publisher}</p>
-          <p>{book.publishedDate}</p>
-          <p>{book.shelf}</p>
+          <p style={{ color: themeStyle.textOpacity1 }}>{book.authors}</p>
+          <p style={{ color: themeStyle.textOpacity1 }}>{book.categories}</p>
+          <p style={{ color: themeStyle.textOpacity1 }}>{book.publisher}</p>
+          <p style={{ color: themeStyle.textOpacity1 }}>{book.publishedDate}</p>
+          <p style={{ color: themeStyle.textOpacity1 }}>{book.shelf}</p>
         </div>
       </div>
-      <div className="modal-lower">
+      <div style={{ color: themeStyle.textOpacity1, background: themeStyle.header }} className="modal-lower">
         {book.description}
       </div>
     </div>

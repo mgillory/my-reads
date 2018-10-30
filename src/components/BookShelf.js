@@ -12,8 +12,6 @@ export default class BookShelf extends Component {
     const {
       books, sections, handleChange, loading, onThemeChange, darkTheme, themeStyle
     } = this.props;
-    console.log('BookShelf: ', books);
-    console.log('themeStyle', themeStyle);
 
     const renderSections = sections.map(section => (
       <div key={section.name} className="bookshelf">
@@ -23,7 +21,7 @@ export default class BookShelf extends Component {
             className="loader"
             sizeUnit="px"
             size={14}
-            color="#123abc"
+            color={themeStyle.action}
             loading={loading}
           />
           <BookList

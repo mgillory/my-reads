@@ -18,10 +18,8 @@ export default class Search extends Component {
       searchQuery: e.target.value,
       loading: true
     });
-    console.log(e.target.value)
     search(e.target.value)
       .then((res) => {
-        console.log(res)
         this.setState({ queryResult: res, loading: false })
       })
       .catch(err => console.log(err))
@@ -30,7 +28,6 @@ export default class Search extends Component {
   render() {
     const { queryResult, loading } = this.state;
     const { booksOnTheShelf, handleChange, sections, themeStyle } = this.props;
-    console.log('Search: ', booksOnTheShelf);
 
     return (
       <div className="search-container">
@@ -50,7 +47,7 @@ export default class Search extends Component {
             className="loader"
             sizeUnit={"px"}
             size={14}
-            color={'#123abc'}
+            color={themeStyle.action}
             loading={loading}
           />
           <BookList

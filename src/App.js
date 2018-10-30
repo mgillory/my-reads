@@ -35,7 +35,6 @@ class App extends Component {
   }
 
   handleChange = (book, shelf, flagAdded = false) => {
-    console.log('handleChange ', book);
     BooksAPI.update(book, shelf)
       .then((res) => {
         console.log(res)

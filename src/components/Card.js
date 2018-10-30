@@ -33,10 +33,6 @@ export default class Card extends Component {
     handleChange(ref, shelf, this.shouldPushNewBook);
   }
 
-  updateRating = (newRating) => {
-
-  }
-
   render() {
     const { book, books, booksOnTheShelf, onSearch, onClick, sections, themeStyle } = this.props;
     const onShelf = onSearch ? booksOnTheShelf && booksOnTheShelf.find(b => b.id === book.id) : books && books.find(b => b.id === book.id);
@@ -57,7 +53,7 @@ export default class Card extends Component {
                 count={5}
                 value={book.averageRating}
                 edit={onShelf ? true : false}
-                onChange={(newRating) => this.updateRating(newRating)}
+                onChange={(newRating) => console.log(newRating)}
                 size={20}
                 color2={'#BD00FF'} />
             </div>
