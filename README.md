@@ -18,8 +18,8 @@ cd my-reads
 # Install dependencies (or yarn)
 npm install
 
-# Run (or npm)
-yarn start
+# Run (or yarn)
+npm start
 ```
 
 ## Project structure
@@ -33,6 +33,8 @@ Since this is a relatively simple project, I have tried to keep the architecture
 ├── readme/
 |   ├── ...
 ├── src/
+|   ├── __tests__/
+|   |   ├── <test files>
 |   ├── api/
 |   |   ├── BooksAPI.js
 |   ├── components/
@@ -48,6 +50,7 @@ Since this is a relatively simple project, I have tried to keep the architecture
 |   |   ├── ...
 |   ├── utils/
 |   |   ├── theme.js
+|   |   ├── testHelper.js
 |   <other files>
 ```
 
@@ -70,3 +73,7 @@ In order to visualize the order that components are being called, check the diag
 |   |   |   |   ├── Dropdown.js
 |   |   |   ├── ModalContent.js
 ```
+
+## Tests
+
+For tests, it was used [Jest](https://jestjs.io/) + [Enzyme](https://github.com/airbnb/enzyme). With that in mind, it was implemented the shallow rendering tests of all components. To run the tests, simply run `npm test` or `yarn test`
