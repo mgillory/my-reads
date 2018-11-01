@@ -24,7 +24,7 @@ npm start
 
 ## Project structure
 
-Since this is a relatively simple project, I have tried to keep the architecture as lean as possible so so it would not create unnecessary complexity. The structure of the project can be seen below.
+Since this is a relatively simple project, I have tried to keep the architecture as lean as possible so it would not create unnecessary complexity. The structure of the project can be seen below.
 
 ```
 .
