@@ -7,7 +7,6 @@ Feel free to [check the deployment on Heroku](https://myreadsmatheus.herokuapp.c
 or install and run it locally on your machine with the steps listed below.
 
 ## How to install and run it locally
-=======
 MyReads is the first project offered by Udacity's React Developer nanodegree program.
 
 [Check the deployment on Heroku](https://myreadsmatheus.herokuapp.com/)
