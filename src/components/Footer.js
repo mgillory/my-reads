@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ThemeSwitcher from './ThemeSwitcher';
 
 export default function Footer({ onThemeChange, themeStyle, darkTheme }) {
@@ -10,4 +11,10 @@ export default function Footer({ onThemeChange, themeStyle, darkTheme }) {
       </div>
     </footer>
   )
+}
+
+Footer.propTypes = {
+  onThemeChange: PropTypes.func.isRequired,
+  themeStyle: PropTypes.object.isRequired,
+  darkTheme: PropTypes.bool.isRequired,
 }

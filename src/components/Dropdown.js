@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import '../App.css';
 
 export default class Dropdown extends Component {
@@ -40,4 +41,13 @@ export default class Dropdown extends Component {
       </div>
     )
   }
+}
+
+Dropdown.propTypes = {
+  title: PropTypes.string.isRequired,
+  list: PropTypes.array.isRequired,
+  book: PropTypes.object.isRequired,
+  shelf: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  themeStyle: PropTypes.object.isRequired,
 }

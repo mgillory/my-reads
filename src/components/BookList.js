@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
+import PropTypes from 'prop-types';
 import Card from './Card';
 import ModalContent from './ModalContent';
 import '../App.css';
 
-Modal.setAppElement('#root');
+if (process.env.NODE_ENV !== 'test') Modal.setAppElement('#root');
 
 export default class BookList extends Component {
   constructor(props) {
@@ -66,4 +67,13 @@ export default class BookList extends Component {
       </div>
     );
   }
+}
+
+BookList.propTypes = {
+  onSearch: PropTypes.bool,
+  booksOnTheShelf: PropTypes.array,
+  books: PropTypes.array,
+  handleChange: PropTypes.func.isRequired,
+  sections: PropTypes.array.isRequired,
+  themeStyle: PropTypes.object.isRequired,
 }

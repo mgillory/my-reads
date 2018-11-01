@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
 import { PulseLoader } from 'react-spinners';
+import PropTypes from 'prop-types';
 import Search from './Search';
 import Footer from './Footer';
 import ThemeSwitcher from './ThemeSwitcher';
@@ -42,7 +43,12 @@ export default class BookShelf extends Component {
             <h1 id="reads">reads</h1>
           </div>
           <div className="theme-and-search">
-            <ThemeSwitcher themeStyle={themeStyle} divClass="header-theme-selector" pClass="header-theme-selector-p" onThemeChange={onThemeChange} darkTheme={darkTheme} />
+            <ThemeSwitcher
+              themeStyle={themeStyle}
+              divClass="header-theme-selector"
+              pClass="header-theme-selector-p"
+              onThemeChange={onThemeChange}
+              darkTheme={darkTheme} />
             <Link to="/search">
               <button className="btn btn-3 btn-3e">
                 Search <i style={{ color: '#fff', fontSize: 21 }} className="search-icon ion-ios-search" />
@@ -64,4 +70,14 @@ export default class BookShelf extends Component {
       </div>
     );
   }
+}
+
+BookShelf.propTypes = {
+  books: PropTypes.array.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  sections: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
+  onThemeChange: PropTypes.func.isRequired,
+  darkTheme: PropTypes.bool.isRequired,
+  themeStyle: PropTypes.object.isRequired
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import Rating from 'react-stars';
+import PropTypes from 'prop-types';
 import '../App.css';
 
 export default function ModalContent({ book, themeStyle }) {
@@ -32,4 +33,9 @@ export default function ModalContent({ book, themeStyle }) {
       </div>
     </div>
   )
+}
+
+ModalContent.propTypes = {
+  book: PropTypes.object.isRequired,
+  themeStyle: PropTypes.object.isRequired,
 }
