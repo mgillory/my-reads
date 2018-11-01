@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import Search from './components/Search';
+import App from './App';
 
 describe('<App />', () => {
   it('renders <App /> component', () => {
-    const wrapper = shallow(<Search />);
+    const wrapper = shallow(<App />);
   });
 });

@@ -5,7 +5,7 @@ import Card from './Card';
 import ModalContent from './ModalContent';
 import '../App.css';
 
-Modal.setAppElement('#root');
+if (process.env.NODE_ENV !== 'test') Modal.setAppElement('#root');
 
 export default class BookList extends Component {
   constructor(props) {
